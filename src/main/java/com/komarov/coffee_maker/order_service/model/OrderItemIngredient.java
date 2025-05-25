@@ -8,13 +8,11 @@ import lombok.Setter;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-public class OrderItem implements Serializable {
+public class OrderItemIngredient implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
@@ -24,15 +22,10 @@ public class OrderItem implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "item_id")
+    private OrderItem orderItem;
 
-    private Integer quantity;
+    private Long ingredientId;
 
-    private BigDecimal totalPrice;
-
-    private Long itemId;
-
-    @OneToMany(mappedBy = "orderItem")
-    private Set<OrderItemIngredient> itemIngredients = new HashSet<>();
+    private BigDecimal price;
 }
